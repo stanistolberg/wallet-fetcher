@@ -7,9 +7,12 @@
   "dependencies": {
     "@moralisweb3/common-evm-utils": "2.10.3",
     "@moralisweb3/evm-utils": "2.10.3",
+    "big-integer": "^1.6.51",
     "big.js": "6.2.1",
+    "bignumber": "^1.1.0",
     "moralis": "2.10.3",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "18.2.0",
     "react-scripts": "4.0.0"
   },
