@@ -1,0 +1,45 @@
+.wallet-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .wallet-header {
+    background-color: #eee;
+    padding: 20px;
+  }
+  
+  .wallet-title {
+    margin: 0;
+    text-align: center;
+  }
+  
+  .wallet-body {
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  .wallet-address {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .wallet-address-value {
+    color: #333;
+  }
+  
+  .wallet-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .wallet-table th,
+  .wallet-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .wallet-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  

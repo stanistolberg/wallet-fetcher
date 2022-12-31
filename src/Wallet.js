@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
 import ResponseTable from "./ResponseTable";
+import "./Wallet.css";
 
 function Wallet(props) {
   const [ethResponse, setEthResponse] = useState(null);
