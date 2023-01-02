@@ -1,12 +1,24 @@
 import React from "react";
 import "./ResponseTable.css";
+import { useState, useEffect } from "react";
 
 const ResponseTable = (props) => {
-  const { walletAddress, response } = props;
+  const { walletAddress, responses } = props;
 
-  // If the response is empty, return an empty table
-  if (!response) {
-    return <p>Empty response</p>;
+  const [Allresponses, setAllResponses] = useState([]);
+
+  //create an array of all responses by adding new responses to the array
+  useEffect(() => {
+    if (props) {
+      setAllResponses((prev) => [...prev, props]);
+    }
+  }, [props]);
+
+console.log("Allresponses", Allresponses);
+
+  // If the responses is empty, return an empty table
+  if (!responses) {
+    return <p>Empty responses</p>;
   }
 
   // function to make the table sortable
@@ -73,33 +85,105 @@ const ResponseTable = (props) => {
     }
   }
 
+  //function to make the table filterable
+  const [filteredResponse, setFilteredResponse] = useState(responses);
+  const [filter, setFilter] = useState({
+    balance: "",
+    symbol: "",
+  });
+
+  const handleFilterChange = (event) => {
+    const { name, value } = event.target;
+    setFilter((prevFilter) => ({ ...prevFilter, [name]: value }));
+  };
+
+  useEffect(() => {
+    setFilteredResponse(
+      props.responses.filter((item) => {
+        if (filter.balance && item.balance < filter.balance) {
+          return false;
+        }
+        if (filter.symbol && item.symbol !== filter.symbol) {
+          return false;
+        }
+        return true;
+      })
+    );
+  }, [filter, props.responses]);
+
   return (
-    <table id="myTable" className="responsive-table">
-      <thead>
-        <tr>
-          <th onClick={() => sortTable(0)}>Wallet Address</th>
+    <>
+      <div className="filter-form">
+        <form>
+          <label htmlFor="balance">
+            Minimum balance:
+            <input
+              type="number"
+              name="balance"
+              value={filter.balance}
+              onChange={handleFilterChange}
+            />
+          </label>
+          <label htmlFor="symbol">
+            Token symbol:
+            <input
+              type="text"
+              name="symbol"
+              value={filter.symbol}
+              onChange={handleFilterChange}
+            />
+          </label>
+        </form>
+      </div>
+      <table id="myTable" className="responsive-table">
+        <thead>
+          <tr>
+            <th onClick={() => sortTable(0)} className="sort">
+              Wallet Address
+            </th>
 
-          <th onClick={() => sortTable(1)}>Symbol</th>
+            <th onClick={() => sortTable(1)} className="sort">
+              Symbol
+            </th>
 
-          <th onClick={() => sortTable(2)}>Balance</th>
+            <th onClick={() => sortTable(2)} className="sort">
+              Balance
+            </th>
 
-          <th onClick={() => sortTable(3)}>Chain</th>
-        </tr>
-      </thead>
-      <tbody>
-        {response.map((item, index) => (
-          <tr key={index}>
-            <td>{walletAddress}</td>
-
-            <td>{item.symbol}</td>
-
-            <td>{item.balance}</td>
-
-            <td>{item.chain}</td>
+            <th onClick={() => sortTable(3)} className="sort">
+              Chain
+            </th>
           </tr>
-        ))}
-      </tbody>
+        </thead>
+        <tbody>
+          {filteredResponse.map((item, index) => (
+            
+            <tr key={index}>
+              <td>{walletAddress}</td>
+
+              <td>{item.symbol}</td>
+
+              <td>{item.balance}</td>
+
+              <td>{item.chain}</td>
+            </tr>
+          ))}
+        </tbody>
+      {/* <tbody>
+        {responses.map((response) => {
+          return response.responses.map((item) => (
+            <tr key={item.symbol}>
+              <td>{props.walletAddress}</td>
+              <td>{item.symbol}</td>
+              <td>{item.decimals}</td>
+              <td>{item.balance}</td>
+              <td>{item.chain}</td>
+            </tr>
+          ));
+        })}
+      </tbody> */}
     </table>
+    </>
   );
 };
 //write annotation for the above code

@@ -197,7 +197,7 @@ const reorderedNativeResponses = nativeResponses.map((item) => {
     };
   });
 
-  console.log("reorderedNativeResponses", reorderedNativeResponses);
+  // console.log("reorderedNativeResponses", reorderedNativeResponses);
 
   //combine all responses into one array
   const allResponses = ethResponse_token.concat(
@@ -206,7 +206,7 @@ const reorderedNativeResponses = nativeResponses.map((item) => {
     reorderedNativeResponses
   );
 
-  console.log("allResponses", allResponses);
+  // console.log("allResponses", allResponses);
 
 
 
@@ -240,7 +240,7 @@ const reorderedNativeResponses = nativeResponses.map((item) => {
         <>
           <ResponseTable
             walletAddress={props.address}
-            response={allResponses}
+            responses={allResponses}
           />
 
           {/* show allResponses as a string */}
